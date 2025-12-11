@@ -5,12 +5,16 @@ import PetInfo from './PetInfo';
 import BookingConfirmation from './BookingConfirmation';
 import { Calendar, User, PawPrint } from 'lucide-react';
 import Button from '../common/Button';
+import { areas } from '../../data/areas';
+import { sitters } from '../../data/sitters';
 
 const BookingForm = () => {
   const [step, setStep] = useState(1);
   const [bookingData, setBookingData] = useState({
     date: '',
     time: '',
+    areaSlug: '',
+    selectedSitterId: '',
     ownerName: '',
     ownerEmail: '',
     ownerPhone: '',
@@ -38,11 +42,11 @@ const BookingForm = () => {
   };
 
   const isStepValid = () => {
-    if (step === 1) return bookingData.date && bookingData.time;
-    if (step === 2) return bookingData.ownerName && bookingData.ownerEmail && bookingData.ownerPhone;
-    if (step === 3) return bookingData.petName && bookingData.petType;
-    return false;
-  };
+  if (step === 1) return bookingData.date && bookingData.time && bookingData.areaSlug && bookingData.selectedSitterId;
+  if (step === 2) return bookingData.ownerName && bookingData.ownerEmail && bookingData.ownerPhone;
+  if (step === 3) return bookingData.petName && bookingData.petType;
+  return false;
+};
 
   const resetForm = () => {
     setBookingData({
@@ -90,7 +94,14 @@ const BookingForm = () => {
 
       {/* Form Content */}
       <div className="bg-white rounded-2xl shadow-2xl p-8">
-        {step === 1 && <DateTimePicker data={bookingData} onUpdate={updateBookingData} />}
+        {step === 1 && (
+          <DateTimePicker
+            data={bookingData}
+            onUpdate={updateBookingData}
+            areas={areas}
+            sitters={sitters}
+          />
+        )}
         {step === 2 && <OwnerInfo data={bookingData} onUpdate={updateBookingData} />}
         {step === 3 && <PetInfo data={bookingData} onUpdate={updateBookingData} />}
 

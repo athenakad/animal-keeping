@@ -1,10 +1,3 @@
-export const areas = [
-  { id: 1, name: 'Κέντρο Αθήνας', slug: 'kentro-athinas' },
-  { id: 2, name: 'Βόρεια Προάστια', slug: 'voria-proastia' },
-  { id: 3, name: 'Νότια Προάστια', slug: 'notia-proastia' },
-  { id: 4, name: 'Πειραιάς', slug: 'peiraias' },
-];
-
 export const sitters = [
   { id: 1, name: 'Μαρία Κ.', areaSlug: 'kentro-athinas', avatar: '🐶', rating: 4.9, price: 12 },
   { id: 2, name: 'Γιάννης Π.', areaSlug: 'kentro-athinas', avatar: '🐱', rating: 4.8, price: 10 },

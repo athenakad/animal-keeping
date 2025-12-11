@@ -11,6 +11,8 @@ import Articles       from './pages/Articles';
 import Sitters        from './pages/Sitters';
 import Booking        from './pages/Booking';
 import Contact        from './pages/Contact';
+import Areas      from './pages/Areas';
+import AreaSitters from './pages/AreaSitters';
 
 /* ------- components ------- */
 import Login           from './components/auth/Login.jsx';
@@ -27,6 +29,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/sitters" element={<Sitters />} />
+        <Route path="/areas" element={<Areas />} />
+        <Route path="/areas/:slug" element={<AreaSitters />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -10,7 +10,7 @@ const Header = () => {
   const navLinks = [
     { label: 'Άρθρα', to: '/articles' },
     { label: 'Η Ομάδα μας', to: '/sitters' },
-    { label: 'Κράτηση', to: '/booking' },
+//     { label: 'Κράτηση', to: '/booking' },
     { label: 'Επικοινωνία', to: '/contact' },
   ];
 

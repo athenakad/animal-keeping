@@ -1,66 +1,104 @@
 import React from 'react';
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar, Clock, MapPin, User, Star } from 'lucide-react';
 
-const DateTimePicker = ({ data, onUpdate }) => {
-  const availableTimes = [
-    '09:00','10:00','11:00','12:00','14:00','15:00','16:00','17:00','18:00'
-  ];
+const DateTimePicker = ({ data, onUpdate, areas, sitters }) => {
+  const handleAreaChange = (e) => {
+    onUpdate({ areaSlug: e.target.value, selectedSitterId: '' });
+  };
+
+  const handleSitterChange = (e) => {
+    onUpdate({ selectedSitterId: e.target.value });
+  };
+
+  const availableSitters = sitters.filter((s) => s.areaSlug === data.areaSlug);
 
   return (
-    <div>
-      {/* 1. Τίτλος με απαλό sky-400 αντί για sky */}
-      <h2 className="text-2xl font-bold text-slate-700 mb-6 flex items-center gap-2">
-        <Calendar className="w-6 h-6 text-sky-700" />
-        Επιλέξτε Ημερομηνία & Ώρα
-      </h2>
+    <div className="space-y-6">
+      {/* Επιλογή Περιοχής */}
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+          <MapPin className="w-4 h-4 text-sky-600" /> Περιοχή
+        </label>
+        <select
+          value={data.areaSlug}
+          onChange={handleAreaChange}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
+        >
+          <option value="">-- Επιλέξτε περιοχή --</option>
+          {areas.map((a) => (
+            <option key={a.id} value={a.slug}>{a.name}</option>
+          ))}
+        </select>
+      </div>
 
-      <div className="space-y-6">
-        {/* --- Date Picker --- */}
+      {/* Εμφάνιση Sitters */}
+      {data.areaSlug && (
         <div>
-          <label className="block text-sm font-semibold text-slate-600 mb-2">
-            Ημερομηνία <span className="text-sky-600">*</span>
+          <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+            <User className="w-4 h-4 text-sky-600" /> Διαθέσιμος Sitter
+          </label>
+          {availableSitters.length === 0 ? (
+            <p className="text-sm text-slate-500">Δεν υπάρχουν διαθέσιμοι sitters σε αυτή την περιοχή.</p>
+          ) : (
+            <div className="grid gap-3 md:grid-cols-2">
+              {availableSitters.map((s) => (
+                <label
+                  key={s.id}
+                  className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition ${data.selectedSitterId == s.id ? 'border-sky-500 bg-sky-50' : 'border-gray-200 hover:border-sky-300'}`}
+                >
+                  <input
+                    type="radio"
+                    name="sitter"
+                    value={s.id}
+                    checked={data.selectedSitterId == s.id}
+                    onChange={handleSitterChange}
+                    className="sr-only"
+                  />
+                  <span className="text-2xl">{s.avatar}</span>
+                  <div className="flex-1">
+                    <p className="font-semibold text-slate-800">{s.name}</p>
+                    <div className="flex items-center gap-1 text-sm text-amber-600">
+                      <Star className="w-3 h-3" /> {s.rating}
+                    </div>
+                  </div>
+                  <span className="text-sm text-slate-600">από {s.price}€</span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Ημερομηνία & Ώρα */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+            <Calendar className="w-4 h-4 text-sky-600" /> Ημερομηνία
           </label>
           <input
             type="date"
-            value={data.date}Φ
-            onChange={(e) => onUpdate({ date: e.target.value })}
+            value={data.date}
             min={new Date().toISOString().split('T')[0]}
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg
-                       focus:border-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-200
-                       transition"
+            onChange={(e) => onUpdate({ date: e.target.value })}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
           />
         </div>
 
-        {/* --- Time Slots --- */}
         <div>
-          <label className="block text-sm font-semibold text-slate-600 mb-2">
-            Διαθέσιμες Ώρες <span className="text-sky-700">*</span>
+          <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+            <Clock className="w-4 h-4 text-sky-600" /> Ώρα
           </label>
-          <div className="grid grid-cols-3 gap-3">
-            {availableTimes.map((time) => (
-              <button
-                key={time}
-                onClick={() => onUpdate({ time })}
-                className={`py-3 rounded-lg font-semibold transition-all ${
-                  data.time === time
-                  ? 'bg-sky-100 text-sky-700 border-sky-300'
-                  : 'bg-white text-slate-700 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
-                <Clock className="w-4 h-4 inline mr-1" />
-                {time}
-              </button>
+          <select
+            value={data.time}
+            onChange={(e) => onUpdate({ time: e.target.value })}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
+          >
+            <option value="">-- Επιλέξτε ώρα --</option>
+            {['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00'].map(t => (
+              <option key={t} value={t}>{t}</option>
             ))}
-          </div>
+          </select>
         </div>
-
-        {/* --- Selected Preview --- */}
-        {data.date && data.time && (
-          <div className="bg-sky-50 border border-sky-100 rounded-lg p-4 text-slate-700 text-sm">
-            <strong>Επιλεγμένο Ραντεβού:</strong>{' '}
-            {new Date(data.date).toLocaleDateString('el-GR')} στις {data.time}
-          </div>
-        )}
       </div>
     </div>
   );
