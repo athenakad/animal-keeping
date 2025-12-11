@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { PawPrint, Menu, X } from 'lucide-react';
+import { PawPrint } from 'lucide-react';   // αφαίρεσα Menu, X
 import { useAuth } from '../../context/AuthContext';
 
 const Header = () => {
   const { user, logout } = useAuth();
-  const [open, setOpen] = useState(false);
 
   const navLinks = [
     { label: 'Άρθρα', to: '/articles' },
-    { label: 'Η Ομάδα μας', to: '/sitters' },
-//     { label: 'Κράτηση', to: '/booking' },
+    { label: 'Sitters', to: '/sitters' },
+    { label: 'Σχετικά με εμάς', to: '/us' },
+    { label: 'Πως λειτουργεί', to: '/works' },
     { label: 'Επικοινωνία', to: '/contact' },
   ];
 
@@ -33,12 +33,18 @@ const Header = () => {
 
           {user ? (
             <>
-              <Link to="/my-bookings" className="text-sky-700 hover:text-sky-600">Οι Κρατήσεις μου</Link>
-              <button onClick={logout} className="text-sky-700 hover:text-red-600">Έξοδος</button>
+              <Link to="/my-bookings" className="text-sky-700 hover:text-sky-600">
+                Οι Κρατήσεις μου
+              </Link>
+              <button onClick={logout} className="text-sky-700 hover:text-red-600">
+                Έξοδος
+              </button>
             </>
           ) : (
             <div className="flex items-center gap-4">
-              <Link to="/login" className="text-sky-700 hover:text-sky-600">Σύνδεση</Link>
+              <Link to="/login" className="text-sky-700 hover:text-sky-600">
+                Σύνδεση
+              </Link>
               <Link
                 to="/register"
                 className="bg-emerald-500 text-white px-3 py-1.5 rounded-lg hover:text-sky-600 transition"
@@ -48,35 +54,7 @@ const Header = () => {
             </div>
           )}
         </nav>
-
-        {/* Mobile menu button */}
-        <button className="md:hidden text-sky-700" onClick={() => setOpen((o) => !o)}>
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
       </div>
-
-      {/* Mobile panel */}
-      {open && (
-        <div className="md:hidden px-4 pb-4 space-y-3 text-sm">
-          {navLinks.map((l) => (
-            <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="block text-sky-700 hover:text-sky-600">
-              {l.label}
-            </Link>
-          ))}
-
-          {user ? (
-            <>
-              <Link to="/my-bookings" onClick={() => setOpen(false)} className="block text-sky-700 hover:text-sky-600">Οι Κρατήσεις μου</Link>
-              <button onClick={() => { logout(); setOpen(false); }} className="block text-red-600">Έξοδος</button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" onClick={() => setOpen(false)} className="block text-sky-700 hover:text-sky-600">Σύνδεση</Link>
-              <Link to="/register" onClick={() => setOpen(false)} className="block text-sky-600 font-semibold">Εγγραφή</Link>
-            </>
-          )}
-        </div>
-      )}
     </header>
   );
 };
