@@ -21,9 +21,10 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold mb-3">Γρήγορη πλοήγηση</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/blog" className="hover:text-sky-600 transition">Άρθρα</a></li>
+            <li><a href="/articles" className="hover:text-sky-600 transition">Άρθρα</a></li>
             <li><a href="/sitters" className="hover:text-sky-600 transition">Sitters</a></li>
-            <li><a href="/faq" className="hover:text-sky-600 transition">FAQ</a></li>
+            <li><a href="/us" className="hover:text-sky-600 transition">Σχετικά με εμάς</a></li>
+            <li><a href="/works" className="hover:text-sky-600 transition">Πως λειτουργεί</a></li>
             <li><a href="/contact" className="hover:text-sky-600 transition">Επικοινωνία</a></li>
           </ul>
         </div>

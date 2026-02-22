@@ -21,10 +21,6 @@ export default function HowItWorks() {
   const [active, setActive] = useState('owner');
   const topRef = useRef(null);
 
-  useEffect(() => {
-    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, [active]);
-
   return (
     <section ref={topRef} className="py-20 px-40 bg-gradient-to-br from-sky-50 to-sky-100">
       <div className="max-w-3xl mx-auto">

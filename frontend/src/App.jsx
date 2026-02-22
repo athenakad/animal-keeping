@@ -27,37 +27,37 @@ function App() {
   return (
     <AuthProvider>
    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <img
-          src="/icons/poop.svg"
-          alt=""
-          className="shape top-[15%] left-[6%] w-48 drop-shadow-xl"
-          style={{ animationDelay: '0s' }}
-        />
-        <img
-          src="/icons/doggy-bro.svg"
-          alt=""
-          className="shape top-[40%] right-[10%] w-48 drop-shadow-xl"
-          style={{ animationDelay: '9s' }}
-        />
-        <img
-          src="/icons/care-amico.svg"
-          alt=""
-          className="shape top-[58%] left-[8%] w-48 drop-shadow-xl"
-          style={{ animationDelay: '18s' }}
-        />
-        <img
-          src="/icons/care-pana.svg"
-          alt=""
-          className="shape top-[12%] right-[2%] w-48 drop-shadow-xl"
-          style={{ animationDelay: '27s' }}
-        />
-        <img
-          src="/icons/care.svg"
-          alt=""
-          className="shape top-[70%] right-[5%] w-48 drop-shadow-xl"
-          style={{ animationDelay: '27s' }}
-        />
-      </div>
+  <img
+    src="/icons/poop.svg"
+    alt=""
+    className="absolute w-24 sm:w-32 md:w-48 top-[8%] sm:top-[10%] md:top-[15%] left-[4%] sm:left-[5%] md:left-[6%] drop-shadow-xl"
+    style={{ animationDelay: '0s' }}
+  />
+  <img
+    src="/icons/doggy-bro.svg"
+    alt=""
+    className="absolute w-24 sm:w-32 md:w-48 top-[25%] sm:top-[35%] md:top-[40%] right-[5%] sm:right-[8%] md:right-[10%] drop-shadow-xl"
+    style={{ animationDelay: '9s' }}
+  />
+  <img
+    src="/icons/care-amico.svg"
+    alt=""
+    className="absolute w-24 sm:w-32 md:w-48 top-[50%] sm:top-[55%] md:top-[58%] left-[4%] sm:left-[6%] md:left-[8%] drop-shadow-xl"
+    style={{ animationDelay: '18s' }}
+  />
+  <img
+    src="/icons/care-pana.svg"
+    alt=""
+    className="absolute w-24 sm:w-32 md:w-48 top-[5%] sm:top-[10%] md:top-[12%] right-[2%] sm:right-[3%] md:right-[4%] drop-shadow-xl"
+    style={{ animationDelay: '27s' }}
+  />
+  <img
+    src="/icons/care.svg"
+    alt=""
+    className="absolute w-24 sm:w-32 md:w-48 top-[60%] sm:top-[65%] md:top-[70%] right-[5%] sm:right-[6%] md:right-[8%] drop-shadow-xl"
+    style={{ animationDelay: '27s' }}
+  />
+</div>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
